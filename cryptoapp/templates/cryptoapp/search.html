@@ -1,0 +1,46 @@
+{% extends 'cryptoapp/base.html' %}
+
+
+{% block title %}
+Search
+{% endblock %}
+
+
+{% block content %}
+
+{% if display_something %}
+<h4>{{ display_something }}</h4>
+{% else %}
+   <!-- error handling for blank -->
+  {% if price_data.Response %}
+    <p>Sorry we are unable to Search {{ data }}</p>
+      {% else %}
+    <table class="table table-dark table-hover mt-4">
+        <thead>
+            
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Price</th>
+            <th scope="col">LowDay</th>
+            <th scope="col">HighDay</th>
+            <th scope="col">Market Capt</th>
+
+        </tr>
+        </thead>
+        {% for k,v in price_data.DISPLAY.items %}
+        <tbody>
+        <tr>
+            <th scope="row">{{ k }}</th>
+            <td>{{ v.USD.PRICE }}</td>
+            <td>{{ v.USD.LOWDAY }}</td>
+            <td>{{ v.USD.HIGHDAY }}</td>
+            <td>{{ v.USD.MKTCAP }}</td>  
+        </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+       {%  endif %}
+
+    {%  endif %}
+
+{% endblock %}
